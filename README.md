@@ -61,6 +61,9 @@ Review the TPC-C settings in `tpcc.properties`, then run this command To run the
 ```
 java -classpath target/tpcc-1.0.0-SNAPSHOT-jar-with-dependencies.jar com.codefutures.tpcc.Tpcc
 ```
+
+DB pagehelper.helper-dialect: postgresql
+
 # View History Image
 ```
 kubectl rollout history deploy -n mpaas service01
