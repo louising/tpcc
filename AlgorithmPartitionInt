@@ -17,7 +17,8 @@ public class AlgorithmPartitionInt {
         List<List<Integer>> result = new ArrayList<>();
         partitionIntRecur(num, num, new ArrayList<>(), result);
         AtomicInteger nu = new AtomicInteger(1);
-        result.forEach(list -> {System.out.printf("%2d: %s\n", nu.getAndIncrement(), list.toString());});
+        //result.forEach(list -> {System.out.printf("%2d: %s\n", nu.getAndIncrement(), list.toString());});
+        result.forEach(list -> { System.out.printf("%2d: %s\n", nu.getAndIncrement(), list.stream().map(String::valueOf).reduce((a, b) -> a + " + " + b).orElse("")); });
     }
 
     static void partitionIntRecur(int num, int max, List<Integer> curr, List<List<Integer>> result) {
