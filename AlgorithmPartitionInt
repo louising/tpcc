@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AlgorithmPartitionInt {
+    public static void main(String[] args) {
+        partitionInt(8);
+    }
+
+    /*
+    Partition an integer, e.g.
+    3(3) 4(5) 5(7) 6(11) 7(15) 8(22)
+    3: 3; 2 1; 1 1 1;
+    4: 4; 3 1; 2 2; 2 1 1; 1 1 1 1 1;
+     */
+    static void partitionInt(int num) {
+        List<List<Integer>> result = new ArrayList<>();
+        partitionIntRecur(num, num, new ArrayList<>(), result);
+        AtomicInteger nu = new AtomicInteger(1);
+        result.forEach(list -> {System.out.printf("%2d: %s\n", nu.getAndIncrement(), list.toString());});
+    }
+
+    static void partitionIntRecur(int num, int max, List<Integer> curr, List<List<Integer>> result) {
+        if (num == 0) {
+            result.add(new ArrayList<>(curr));
+            return;
+        }
+
+        int n = Math.min(num, max); // Make sure the num is desc order
+        for (int i = n; i > 0; i--) {
+            curr.add(i);
+            partitionIntRecur(num - i, i, curr, result);
+            curr.remove(curr.size() - 1);
+        }
+    }
+
+
+    static int partitionIntCount(int num) {
+        return partitionIntRecurCount(num, num);
+    }
+    static int partitionIntRecurCount(int num, int max) {
+        if (num == 0) {
+            return 1;
+        }
+
+        int count = 0;
+        int n = Math.min(num, max); // Make sure the num is desc order
+        for (int i = n; i > 0; i--) {
+            count += partitionIntRecurCount(num - i, i);
+        }
+        return count;
+    }
+}
