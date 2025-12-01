@@ -69,3 +69,6 @@ DB pagehelper.helper-dialect: postgresql
 kubectl rollout history deploy -n mpaas service01
 kubectl rollout history deploy -n mpaas service01 --revision 38 | grep "Image:"
 ```
+
+# Spring Boot
+HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
