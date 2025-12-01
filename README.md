@@ -68,6 +68,12 @@ DB pagehelper.helper-dialect: postgresql
 ```
 kubectl rollout history deploy -n mpaas service01
 kubectl rollout history deploy -n mpaas service01 --revision 38 | grep "Image:"
+
+vim ~/.bashrc
+alias wfcon='kubectl exec -it -n mpaas $(kubectl get pods -n mpaas | grep ##podName## | awk '\''{print $1}'\'' ) -c ##podName## -- /bin/bash -c "cd /home/app/log/$(kubectl get pods -n mpaas | grep ##podName## | awk '\''{print $1}'\'' ) && exec /bin/bash"'
+alias wflog="kubectl logs -n mpaas $(kubectl get pods -n mpaas | grep ##podName## | awk '{print $1}') -c ##podName## --tail=1000 -f"
+source ~/.bashrc
+
 ```
 
 # Spring Boot
